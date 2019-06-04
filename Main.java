@@ -6,13 +6,15 @@ public class Main{
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int screenSize;
 
-
+    boolean tracing = true;
 
     public static void main(String[] args)throws Exception{
         new Main();
     }
     public Main()throws Exception{
         //setScreenSize();
+
+        if(tracing) System.out.println("Game has been run");
         new runGame();
         //menu();
     }
