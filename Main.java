@@ -1,21 +1,28 @@
+package com.company;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.math.*;
+
 public class Main{
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int screenSize;
 
-    boolean tracing = true;
+    runGame r;
+
+    boolean tracing = false;
 
     public static void main(String[] args)throws Exception{
         new Main();
     }
     public Main()throws Exception{
-        //setScreenSize();
+        setScreenSize();
 
-        if(tracing) System.out.println("Game has been run");
-        new runGame();
+        new Player_Vs_Player(screenSize);
+
+        //if(tracing) System.out.println("Game has been run");
+        //r = new runGame();
         //menu();
     }
 
@@ -80,14 +87,14 @@ public class Main{
             case 1:
                 //clear screen then go to instructions
                 clear();
-            //    instructions();
+                //    instructions();
                 break;
             case 2:
                 //clear the screen
                 clear();
 
                 //run program
-             //   titleScreen();
+                //   titleScreen();
                 pause();
                 clear();
 
@@ -97,7 +104,7 @@ public class Main{
                 clear();
 
                 //run the riddle
-             //   run();
+                //   run();
                 break;
             case 3:
                 //clear screen then exit
@@ -115,6 +122,105 @@ public class Main{
     }
 
 
+    //-----------------------------------Entering Screen (for setting the screen size)--------------------------------
+    public void setScreenSize() throws Exception {
+
+        //add space
+        space();
+        space();
+        space();
+
+        //indent 25 spaces and ask for screen size for centering
+        Out.print("", 25);
+        Out.writeln("Hello, welcome To The Tic Tac Toe");
+
+        time(1000);
+
+        space();
+
+        Out.print("", 25);
+        Out.writeln("You will have a more formal welcome later...");
+        time(1000);
+        space();
+        Out.print("", 25);
+        Out.writeln("I  recommend you set your screen size to 146 x 34, for optimal performance...");
+        space();
+        Out.print("", 25);
+
+        //ask for screen size
+        Out.write("Enter your current screen width: ");
+        screenSize = Integer.parseInt(br.readLine());
+
+        //Add a vertical space
+        space();
+
+        //Add figlet text
+        Out.center(" ### ### ###   #    ###   ###     ##  # ## #####    ####  ####  ##  ### ##### ### ##  ### ### ### ##### ", screenSize);
+        Out.center("#  #  #   #    ##    #     #       # ##  #  #  #   ##  # ##  ##  ##  #    #    #   ##  #   #   #   #  # ", screenSize);
+        Out.center("###   #####   # #    #     #       # ## #   ###    #     #    #  ### #    #    #   ### #   #   #   ###  ", screenSize);
+        Out.center("  ##  #   #   ####   #     #       # ## #   #      #     #    #  # ###    #    #   # ###   #   #   #    ", screenSize);
+        Out.center("#  #  #   #  #   #   #  #  #  #     #  ##   #  #   ##    ##  ##  #  ##    #    #   #  ##   #   #   #  # ", screenSize);
+        Out.center("###  ### ### #   ## ##### #####     #  #   #####    ####  ####  ###  #   ###  ### ###  #   #####  ##### ", screenSize);
+    }
+
+    //--------------------------------------------exit--------------------------------------
+    public void exit() throws Exception {
+        //clear the screen
+        clear();
+
+        //Insert figlet text
+        Out.center("'########:'##::::'##::::'###::::'##::: ##:'##:::'##::'######::", screenSize);
+        Out.center("... ##..:: ##:::: ##:::'## ##::: ###:: ##: ##::'##::'##... ##:", screenSize);
+        Out.center("::: ##:::: ##:::: ##::'##:. ##:: ####: ##: ##:'##::: ##:::..::", screenSize);
+        Out.center("::: ##:::: #########:'##:::. ##: ## ## ##: #####::::. ######::", screenSize);
+        Out.center("::: ##:::: ##.... ##: #########: ##. ####: ##. ##::::..... ##:", screenSize);
+        Out.center("::: ##:::: ##:::: ##: ##.... ##: ##:. ###: ##:. ##::'##::: ##:", screenSize);
+        Out.center("::: ##:::: ##:::: ##: ##:::: ##: ##::. ##: ##::. ##:. ######::", screenSize);
+        Out.center(":::..:::::..:::::..::..:::::..::..::::..::..::::..:::......:::", screenSize);
+
+        Out.center("for coming by... This program will automatically stop in...", screenSize);
+
+        space();//add a linespace
+
+        time(1000);//add delay
+
+        //start countdown
+        Out.center("5", screenSize);
+
+        space();//insert line space
+
+        time(1000);//add delay
+
+        Out.center("4", screenSize);
+
+        space();
+
+        time(1000);
+
+        Out.center("3", screenSize);
+
+        space();
+
+        time(1000);
+
+        Out.center("2", screenSize);
+
+        space();
+
+        time(1000);
+
+        Out.center("1", screenSize);
+
+        space();
+
+        time(1000);
+
+        //Stop the program and exit
+        Out.center("Bye", screenSize);
+        time(1000);
+        System.exit(0);
+
+    }
 
     //----------------------loading-----------------------------------
     public void load() throws Exception{
@@ -412,7 +518,9 @@ public class Main{
         space();
         space();
         space();
+
         time(500);
+
         clear();
 
         //loaded
@@ -439,6 +547,8 @@ public class Main{
         space();
         space();
         space();
+
+        //add a delay
         time(500);
     }
 
@@ -463,106 +573,4 @@ public class Main{
         Thread.sleep(n);
     }
 
-    //-----------------------------------Entering Screen (for setting the screen size)--------------------------------
-
-    public void setScreenSize() throws Exception {
-        //add space
-        space();
-        space();
-        space();
-
-        //indent 25 spaces and ask for screen size for centering
-        Out.print("", 25);
-        Out.writeln("Hello, welcome To The Tic Tac Toe");
-        time(1000);
-        space();
-        Out.print("", 25);
-        Out.writeln("You will have a more formal welcome later...");
-        time(1000);
-        space();
-        Out.print("", 25);
-        Out.writeln("I  recommend you set your screen size to 146 x 34, for optimal performance...");
-        space();
-        Out.print("", 25);
-
-        //ask for screen size
-        Out.write("Enter your current screen width: ");
-        screenSize = Integer.parseInt(br.readLine());
-
-        //Add a vertical space
-        space();
-
-        //Add figlet text
-        Out.center(" ### ### ###   #    ###   ###     ##  # ## #####    ####  ####  ##  ### ##### ### ##  ### ### ### ##### ", screenSize);
-        Out.center("#  #  #   #    ##    #     #       # ##  #  #  #   ##  # ##  ##  ##  #    #    #   ##  #   #   #   #  # ", screenSize);
-        Out.center("###   #####   # #    #     #       # ## #   ###    #     #    #  ### #    #    #   ### #   #   #   ###  ", screenSize);
-        Out.center("  ##  #   #   ####   #     #       # ## #   #      #     #    #  # ###    #    #   # ###   #   #   #    ", screenSize);
-        Out.center("#  #  #   #  #   #   #  #  #  #     #  ##   #  #   ##    ##  ##  #  ##    #    #   #  ##   #   #   #  # ", screenSize);
-        Out.center("###  ### ### #   ## ##### #####     #  #   #####    ####  ####  ###  #   ###  ### ###  #   #####  ##### ", screenSize);
-    }
-
-    //--------------------------------------------exit--------------------------------------
-    public void exit() throws Exception {
-        //clear the screen
-        clear();
-
-        //Insert figlet text
-        Out.center("'########:'##::::'##::::'###::::'##::: ##:'##:::'##::'######::", screenSize);
-        Out.center("... ##..:: ##:::: ##:::'## ##::: ###:: ##: ##::'##::'##... ##:", screenSize);
-        Out.center("::: ##:::: ##:::: ##::'##:. ##:: ####: ##: ##:'##::: ##:::..::", screenSize);
-        Out.center("::: ##:::: #########:'##:::. ##: ## ## ##: #####::::. ######::", screenSize);
-        Out.center("::: ##:::: ##.... ##: #########: ##. ####: ##. ##::::..... ##:", screenSize);
-        Out.center("::: ##:::: ##:::: ##: ##.... ##: ##:. ###: ##:. ##::'##::: ##:", screenSize);
-        Out.center("::: ##:::: ##:::: ##: ##:::: ##: ##::. ##: ##::. ##:. ######::", screenSize);
-        Out.center(":::..:::::..:::::..::..:::::..::..::::..::..::::..:::......:::", screenSize);
-
-        Out.center("for coming by... This program will automatically stop in...", screenSize);
-
-        space();//add a linespace
-
-        time(1000);//add delay
-
-        //start countdown
-        Out.center("5", screenSize);
-
-        space();//insert line space
-
-        time(1000);//add delay
-
-        Out.center("4", screenSize);
-
-        space();
-
-        time(1000);
-
-        Out.center("3", screenSize);
-
-        space();
-
-        time(1000);
-
-        Out.center("2", screenSize);
-
-        space();
-
-        time(1000);
-
-        Out.center("1", screenSize);
-
-        space();
-
-        time(1000);
-
-        //Stop the program and exit
-        Out.center("Bye", screenSize);
-        time(1000);
-        System.exit(0);
-
-    }
-
 }
-
-
-
-
-
