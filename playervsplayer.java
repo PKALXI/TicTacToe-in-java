@@ -1,6 +1,13 @@
-package com.company;
-
-import java.nio.Buffer;
+/*
+ *File name: Player_Vs_Player.java
+ *Number of classes: 4
+ *Name of other three class: Out.java, runGameEasy.java, Main.java
+ *Name: Pranav's Elite Tic Tac Toe
+ *Brief Description: This game allows you to play tic tac toe against a friend or the eas mode on the computer
+ *Author of this program: Pranav Kalsi
+ *Start Date: May 5th 2019
+ *End Date: June 4th 2019
+ */
 import java.util.*;
 import java.io.*;
 
@@ -27,44 +34,194 @@ public class Player_Vs_Player {
             {"7","8","9"}
     };
 
-    public Player_Vs_Player(int n)throws Exception{
+    public Player_Vs_Player(int n)throws Exception {
         screenSize = n;
 
-        Out.centerWrite("Welcome to Player vs. Player", screenSize);
-        Out.centerWrite("'X' will go first", screenSize);
+        String playAgain;
 
-        reset();
+
+        //title of the title page
+        Out.center("'########::'##::::::::::'###::::'##:::'##:'########:'########:::::'##::::'##::'######:::::::", screenSize);
+        Out.center(" ##.... ##: ##:::::::::'## ##:::. ##:'##:: ##.....:: ##.... ##:::: ##:::: ##:'##... ##::::::", screenSize);
+        Out.center(" ##:::: ##: ##::::::::'##:. ##:::. ####::: ##::::::: ##:::: ##:::: ##:::: ##: ##:::..:::::::", screenSize);
+        Out.center(" ########:: ##:::::::'##:::. ##:::. ##:::: ######::: ########::::: ##:::: ##:. ######:::::::", screenSize);
+        Out.center(" ##.....::: ##::::::: #########:::: ##:::: ##...:::: ##.. ##::::::. ##:: ##:::..... ##::::::",screenSize);
+        Out.center(" ##:::::::: ##::::::: ##.... ##:::: ##:::: ##::::::: ##::. ##::::::. ## ##:::'##::: ##:'###:", screenSize);
+        Out.center(" ##:::::::: ########: ##:::: ##:::: ##:::: ########: ##:::. ##::::::. ###::::. ######:: ###:", screenSize);
+        Out.center("..:::::::::........::..:::::..:::::..:::::........::..:::::..::::::::...::::::......:::...::", screenSize);
+
+        Out.center("'########::'##::::::::::'###::::'##:::'##:'########:'########::", screenSize);
+        Out.center(" ##.... ##: ##:::::::::'## ##:::. ##:'##:: ##.....:: ##.... ##:", screenSize);
+        Out.center(" ##:::: ##: ##::::::::'##:. ##:::. ####::: ##::::::: ##:::: ##:", screenSize);
+        Out.center(" ########:: ##:::::::'##:::. ##:::. ##:::: ######::: ########::", screenSize);
+        Out.center(" ##.....::: ##::::::: #########:::: ##:::: ##...:::: ##.. ##:::", screenSize);
+        Out.center(" ##:::::::: ##::::::: ##.... ##:::: ##:::: ##::::::: ##::. ##::", screenSize);
+        Out.center(" ##:::::::: ########: ##:::: ##:::: ##:::: ########: ##:::. ##:", screenSize);
+        Out.center("..:::::::::........::..:::::..:::::..:::::........::..:::::..::", screenSize);
+
+
+        Out.center("'####:'##::::'##:'####::::'##:::::'##:'####:'##:::::::'##:::::::::::'######::::'#######:::::'########:'####:'########:::'######::'########:", screenSize);
+        Out.center(" ####:. ##::'##:: ####:::: ##:'##: ##:. ##:: ##::::::: ##::::::::::'##... ##::'##.... ##:::: ##.....::. ##:: ##.... ##:'##... ##:... ##..::", screenSize);
+        Out.center(". ##:::. ##'##:::. ##::::: ##: ##: ##:: ##:: ##::::::: ##:::::::::: ##:::..::: ##:::: ##:::: ##:::::::: ##:: ##:::: ##: ##:::..::::: ##::::", screenSize);
+        Out.center("'##:::::. ###::::'##:::::: ##: ##: ##:: ##:: ##::::::: ##:::::::::: ##::'####: ##:::: ##:::: ######:::: ##:: ########::. ######::::: ##::::", screenSize);
+        Out.center("..:::::: ## ##:::..::::::: ##: ##: ##:: ##:: ##::::::: ##:::::::::: ##::: ##:: ##:::: ##:::: ##...::::: ##:: ##.. ##::::..... ##:::: ##::::", screenSize);
+        Out.center("::::::: ##:. ##::::::::::: ##: ##: ##:: ##:: ##::::::: ##:::::::::: ##::: ##:: ##:::: ##:::: ##:::::::: ##:: ##::. ##::'##::: ##:::: ##::::", screenSize);
+        Out.center(":::::: ##:::. ##::::::::::. ###. ###::'####: ########: ########::::. ######:::. #######::::: ##:::::::'####: ##:::. ##:. ######::::: ##::::", screenSize);
+        Out.center("::::::..:::::..::::::::::::...::...:::....::........::........::::::......:::::.......::::::..::::::::....::..:::::..:::......::::::..:::::", screenSize);
+
+
+        //add linespaces
+        space();
+        space();
+        space();
+        space();
+        space();
+        space();
+
+        //pause and clear the screen
+        pause();
+        clear();
+
+
         do{
-            //check if it is a tie
-            if(!isGameOver() && areAllSquaresQccupied()){
-                Out.centerWrite("It's a tie.",screenSize);
-                break;
+            load();
+            pause();
+            clear();
+
+            reset();
+            do {
+                //check if it is a tie
+                if (!isGameOver() && areAllSquaresQccupied()) {
+                    Out.centerWrite("It's a tie.", screenSize);
+                    break;
+                }
+
+                printGame();
+
+                space();//add linespace
+
+                askPlayerToMoveX();
+
+                //clear the screen
+                clear();
+
+                printGame();
+
+                //check if it is a tie
+                if (!isGameOver() && areAllSquaresQccupied()) {
+                    Out.centerWrite("It's a tie.", screenSize);
+                    break;
+                }
+
+                space();//add linespace
+
+                if (isGameOver()) break;
+                askPlayerToMoveO();
+
+                clear();
+
+                printGame();
+
+                //check if it is a tie
+                if (!isGameOver() && areAllSquaresQccupied()) {
+                    Out.print("", (screenSize-60)/2);
+                    Out.printLeft("It's a tie", 57);
+                    break;
+                }
+
+                clear();
+            } while (!isGameOver());
+
+            if (isGameOver()) {
+
+                //delay so user can take in the final result
+                time(1000);
+
+                clear();//clear the screen
+
+                //display game over screen
+                gameOver();
+
+                space();//add a linespace
+                space();//add a linespace
+
+                if(winningLetter.equals("X")){
+                    congratsX();
+                }else if(winningLetter.equals("O")){
+                    congratsO();
+                }
             }
 
-            printGame();
-            askPlayerToMoveX();
-            printGame();
 
-            //check if it is a tie
-            if(!isGameOver() && areAllSquaresQccupied()){
-                Out.centerWrite("It's a tie.",screenSize);
-                break;
-            }
+            //pick up trailing characters
+            in.nextLine();
 
-            if(isGameOver())break;
-            askPlayerToMoveO();
-            printGame();
+            //Asks user to play again
+            Out.print("", (screenSize-60)/2);
+            Out.printLeft("Would you like to play again (y/n): ", 57);
+            playAgain = String.valueOf(in.nextLine().charAt(0));
+            playAgain = playAgain.toLowerCase();
 
-            //check if it is a tie
-            if(!isGameOver() && areAllSquaresQccupied()){
-                Out.centerWrite("It's a tie.",screenSize);
-                break;
-            }
-        }while(!isGameOver());
+        }while(playAgain.equals("y"));
 
-        if(isGameOver())Out.centerWrite("Game over, " + winningLetter + " wins.", screenSize);
     }
 
+    //--------------------------------game over--------------------------------------------
+    public void gameOver(){
+        Out.center(":'######::::::'###::::'##::::'##:'########:::::'#######::'##::::'##:'########:'########:::::::::::::::::", screenSize);
+        Out.center("'##... ##::::'## ##::: ###::'###: ##.....:::::'##.... ##: ##:::: ##: ##.....:: ##.... ##::::::::::::::::", screenSize);
+        Out.center(" ##:::..::::'##:. ##:: ####'####: ##:::::::::: ##:::: ##: ##:::: ##: ##::::::: ##:::: ##::::::::::::::::", screenSize);
+        Out.center(" ##::'####:'##:::. ##: ## ### ##: ######:::::: ##:::: ##: ##:::: ##: ######::: ########:::::::::::::::::", screenSize);
+        Out.center(" ##::: ##:: #########: ##. #: ##: ##...::::::: ##:::: ##:. ##:: ##:: ##...:::: ##.. ##::::::::::::::::::", screenSize);
+        Out.center(" ##::: ##:: ##.... ##: ##:.:: ##: ##:::::::::: ##:::: ##::. ## ##::: ##::::::: ##::. ##::'###:'###:'###: ", screenSize);
+        Out.center(". ######::: ##:::: ##: ##:::: ##: ########::::. #######::::. ###:::: ########: ##:::. ##: ###: ###: ###:", screenSize);
+        Out.center(":......::::..:::::..::..:::::..::........::::::.......::::::...:::::........::..:::::..::...::...::...::", screenSize);
+    }
+
+
+    //--------------------------------congratulations screens----------------------------
+    public void congratsX(){
+        Out.center("'##::::'##::::'##:::::'##:'####:'##::: ##:'####::'######::'####:'####:'####:'####:'####:'####:", screenSize);
+        Out.center(". ##::'##::::: ##:'##: ##:. ##:: ###:: ##: ####:'##... ##: ####: ####: ####: ####: ####: ####:", screenSize);
+        Out.center(":. ##'##:::::: ##: ##: ##:: ##:: ####: ##:. ##:: ##:::..:: ####: ####: ####: ####: ####: ####:", screenSize);
+        Out.center("::. ###::::::: ##: ##: ##:: ##:: ## ## ##:'##:::. ######::: ##::: ##::: ##::: ##::: ##::: ##::", screenSize);
+        Out.center(":: ## ##:::::: ##: ##: ##:: ##:: ##. ####:..:::::..... ##::..::::..::::..::::..::::..::::..:::", screenSize);
+        Out.center(": ##:. ##::::: ##: ##: ##:: ##:: ##:. ###:::::::'##::: ##:'####:'####:'####:'####:'####:'####:", screenSize);
+        Out.center(" ##:::. ##::::. ###. ###::'####: ##::. ##:::::::. ######:: ####: ####: ####: ####: ####: ####:", screenSize);
+        Out.center("..:::::..::::::...::...:::....::..::::..:::::::::......:::....::....::....::....::....::....::", screenSize);
+
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+    }
+
+
+    public void congratsO(){
+        Out.center(":'#######:::::'##:::::'##:'####:'##::: ##::'######::'####:'####:'####:'####:'####:'####:", screenSize);
+        Out.center("'##.... ##:::: ##:'##: ##:. ##:: ###:: ##:'##... ##: ####: ####: ####: ####: ####: ####:", screenSize);
+        Out.center(" ##:::: ##:::: ##: ##: ##:: ##:: ####: ##: ##:::..:: ####: ####: ####: ####: ####: ####:", screenSize);
+        Out.center(" ##:::: ##:::: ##: ##: ##:: ##:: ## ## ##:. ######::: ##::: ##::: ##::: ##::: ##::: ##::", screenSize);
+        Out.center(" ##:::: ##:::: ##: ##: ##:: ##:: ##. ####::..... ##::..::::..::::..::::..::::..::::..:::", screenSize);
+        Out.center(" ##:::: ##:::: ##: ##: ##:: ##:: ##:. ###:'##::: ##:'####:'####:'####:'####:'####:'####:", screenSize);
+        Out.center(". #######:::::. ###. ###::'####: ##::. ##:. ######:: ####: ####: ####: ####: ####: ####:", screenSize);
+        Out.center(":.......:::::::...::...:::....::..::::..:::......:::....::....::....::....::....::....::", screenSize);
+
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+        space();//add a linespace
+    }
 
     //---------------------------------check if it is a tie-----------------------------
     public boolean areAllSquaresQccupied(){
@@ -80,9 +237,18 @@ public class Player_Vs_Player {
     public void askPlayerToMoveO(){
         int n;
         do {
-            System.out.print("type the number where you would like to move: ");
+            Out.print("", (screenSize-60)/2);
+            Out.printLeft("Player 'O', type the number where you would like to move: ", 57);
             n = in.nextInt();
 
+            if(isOccupied(n)){
+                space(); //add a linespace
+
+                Out.print("", (screenSize-60)/2);
+                Out.printlnLeft("This square is occupied please pick another square.", 57);
+
+                space(); //add a linespace
+            }
         }while(isOccupied(n));
 
         int col = 0, row = 0;
@@ -104,8 +270,24 @@ public class Player_Vs_Player {
     public void askPlayerToMoveX(){
         int n;
         do {
-            System.out.print("type the number where you would like to move: ");
-            n = in.nextInt();
+            while(true) {
+                Out.print("", (screenSize - 60) / 2);
+                Out.printLeft("Player 'X', type the number where you would like to move: ", 57);
+                n = in.nextInt();
+                if(n > 9){
+                    Out.center("Sorry you entered a number that was not on the board please try again...", screenSize);
+                } else{
+                    break;
+                }
+            }
+            if(isOccupied(n)){
+                space();//add a linespace
+
+                Out.print("", (screenSize-60)/2);
+                Out.printlnLeft("This square is occupied please pick another square.", 57);
+
+                space();//add a linespace
+            }
 
         }while(isOccupied(n));
 
@@ -127,12 +309,9 @@ public class Player_Vs_Player {
     //-----------------------------------print game------------------------------------------------
     public void printGame(){
         for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                System.out.print(" " + game[i][j] + " ");
-                if(j < 2) System.out.print(" | ");
-            }
-            System.out.println("");
-            if(i < 2)System.out.println("-------------");
+
+            Out.center(" " + game[i][0] + " | " + game[i][1] + " | " + game[i][2], screenSize);
+            if(i < 2)Out.center("---------------" , screenSize);
         }
     }
 
@@ -565,7 +744,7 @@ public class Player_Vs_Player {
 
     //-------------------------------clear-----------------------------------
     public void clear(){
-        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
     //-----------------------------vertical space----------------------------
@@ -577,4 +756,5 @@ public class Player_Vs_Player {
     public void time(int n) throws InterruptedException {
         Thread.sleep(n);
     }
+    
 }
