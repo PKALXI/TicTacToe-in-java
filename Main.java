@@ -1,5 +1,13 @@
-package com.company;
-
+/*
+ *File name: Main.java
+ *Number of classes: 4
+ *Name of other three class: Out.java, runGameEasy.java
+ *Name: Pranav's Elite Tic Tac Toe
+ *Brief Description: This game allows you to play tic tac toe against a friend or the eas mode on the computer
+ *Author of this program: Pranav Kalsi
+ *Start Date: May 5th 2019
+ *End Date: June 4th 2019
+ */
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Scanner;
@@ -17,13 +25,16 @@ public class Main{
         new Main();
     }
     public Main()throws Exception{
+
         setScreenSize();
 
-        new Player_Vs_Player(screenSize);
+        clear();
 
-        //if(tracing) System.out.println("Game has been run");
-        //r = new runGame();
-        //menu();
+        if(tracing) System.out.println("Menu has been run");
+
+        while(true){
+            menu();
+        }
     }
 
     //-------------------------------------menu------------------------------------------
@@ -68,12 +79,17 @@ public class Main{
         space();//add a linespace
 
         Out.print("", (screenSize-40)/2);
-        Out.printlnLeft("Enter '2' to Run the program", 40);
+        Out.printlnLeft("Enter '2' to Run The Easy Tic Tac Toe vs. the computer", 60);
 
         space();//add a linespace
 
         Out.print("", (screenSize-40)/2);
-        Out.printlnLeft("Enter '3' Exit the program", 40);
+        Out.printlnLeft("Enter '3' to Run The Player vs. Player", 40);
+
+        space();//add a linespace
+
+        Out.print("", (screenSize-40)/2);
+        Out.printlnLeft("Enter '4' Exit the program", 40);
 
         space();//add a linespace
 
@@ -87,15 +103,12 @@ public class Main{
             case 1:
                 //clear screen then go to instructions
                 clear();
-                //    instructions();
+
+                //Go to the instructions
+                instructions();
                 break;
             case 2:
                 //clear the screen
-                clear();
-
-                //run program
-                //   titleScreen();
-                pause();
                 clear();
 
                 //display loading screen
@@ -103,14 +116,26 @@ public class Main{
                 pause();
                 clear();
 
-                //run the riddle
-                //   run();
+
+                //go to the easy tic tac toe
+                new runGameEasy(screenSize);
+
                 break;
+
             case 3:
-                //clear screen then exit
+                //clear the screen
                 clear();
-                exit();
+
+                //Enter player vs. Player Mode
+                new Player_Vs_Player(screenSize);
+
                 break;
+            case 4:
+                //clear the screen
+                clear();
+
+                //farewell screen
+                exit();
             default:
                 //The default if a option not there is entered
                 clear();
@@ -143,7 +168,7 @@ public class Main{
         time(1000);
         space();
         Out.print("", 25);
-        Out.writeln("I  recommend you set your screen size to 146 x 34, for optimal performance...");
+        Out.writeln("I  recommend you set your screen size to 146 x 37, for optimal performance...");
         space();
         Out.print("", 25);
 
@@ -178,7 +203,9 @@ public class Main{
         Out.center("::: ##:::: ##:::: ##: ##:::: ##: ##::. ##: ##::. ##:. ######::", screenSize);
         Out.center(":::..:::::..:::::..::..:::::..::..::::..::..::::..:::......:::", screenSize);
 
-        Out.center("for coming by... This program will automatically stop in...", screenSize);
+        Out.center("for coming by... This program was created by Pranav Kalsi", screenSize);
+
+        Out.center("I hope you enjoyed this game as much as I did making it!!!", screenSize);
 
         space();//add a linespace
 
@@ -219,6 +246,45 @@ public class Main{
         Out.center("Bye", screenSize);
         time(1000);
         System.exit(0);
+
+    }
+
+    //-----------------------------------instructions------------------------------------
+    public void instructions() throws Exception {
+        //display figlet text
+        Out.center("#### ##    ##  ######  ######## ########  ##     ##  ######  ######## ####  #######  ##    ##  ###### ", screenSize);
+        Out.center(" ##  ###   ## ##    ##    ##    ##     ## ##     ## ##    ##    ##     ##  ##     ## ###   ## ##    ## ", screenSize);
+        Out.center(" ##  ####  ## ##          ##    ##     ## ##     ## ##          ##     ##  ##     ## ####  ## ##       ", screenSize);
+        Out.center(" ##  ## ## ##  ######     ##    ########  ##     ## ##          ##     ##  ##     ## ## ## ##  ######  ", screenSize);
+        Out.center(" ##  ##  ####       ##    ##    ##   ##   ##     ## ##          ##     ##  ##     ## ##  ####       ## ", screenSize);
+        Out.center(" ##  ##   ### ##    ##    ##    ##    ##  ##     ## ##    ##    ##     ##  ##     ## ##   ### ##    ## ", screenSize);
+        Out.center("#### ##    ##  ######     ##    ##     ##  #######   ######     ##    ####  #######  ##    ##  ######  ", screenSize);
+
+        //SHOW INSTRUCTIONS
+        //400ms delay
+        time(400);
+
+        //add 3 line spaces
+        space();
+        space();
+        space();
+
+        Out.centerWrite("This is a very easy process...Easier than the Frog Riddle if you ask me!", screenSize);
+
+        space();
+
+        Out.centerWrite("This is a the ultimate tic tac toe machine! Plaver vs. Player, easy and hard mode.", screenSize);
+
+        //add 500ms delay
+        time(500);
+
+        space();
+
+        Out.centerWrite("Follow the prompts and you will be good", screenSize);
+
+        space();
+
+        Out.centerWrite("You will now be returned to the menu", screenSize);
 
     }
 
@@ -560,7 +626,7 @@ public class Main{
 
     //-------------------------------clear-----------------------------------
     public void clear(){
-        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
     //-----------------------------vertical space----------------------------
@@ -574,3 +640,11 @@ public class Main{
     }
 
 }
+
+/*
+* MY TEST CASES
+*
+* MY TEST CASES WORKED PERFECTLY AND EACH EXPECTED OUTCOME WAS AN EXACT MATCH
+* The only problem is I couldn't develop the full algorithm due to a logic error
+*
+* */
